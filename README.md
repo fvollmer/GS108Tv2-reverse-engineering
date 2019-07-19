@@ -27,8 +27,22 @@ Netgear GS108Tv2 reverse engineering
  
 ## Boot Initialization of the Stock Firmware
 Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. So here a rough overview of the boot and initialization process:
+ * `_start`                        at `packages/hal/mips/arch/v2_0/src/vectors.S`
+	* `hal_cpu_init`                at `packages/hal/mips/arch/v2_0/include/arch.inc`
+	* `hal_diag_init`               at `packages/hal/mips/bcm953710/v2_0/src/hal_diag.c`
+	* `hal_mmu_init`                at `packages/hal/mips/arch/v2_0/include/arch.inc`
+	* `hal_fpu_init`                at `packages/hal/mips/arch/v2_0/include/arch.inc`
+	* `hal_memc_init`               at `packages/hal/mips/bcm953710/v2_0/include/platform.inc`
+		* `board_draminit`           at `packages/hal/mips/bcm953710/v2_0/src/sbsdram.S:156`
+	* `hal_cache_init`              at `packages/hal/mips/bcm47xx/v2_0/include/variant.inc:24`
+	* `hal_timer_init`              at `packages/hal/mips/arch/v2_0/include/arch.inc:813`
+	* `hal_variant_init`            at `packages/hal/mips/bcm47xx/v2_0/src/var_misc.c`
+	* `hal_platform_init()`         at `packages/hal/mips/bcm953710/v2_0/src/plf_misc.c`
+		* `sbh = sb_kattach()`
+			* `sb_doattach(&ksi, ...)`
+		* `sb_mips_init(sbh)`
 
-ToDo
+
 
 ## Miscellaneous Stuff:
  * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
