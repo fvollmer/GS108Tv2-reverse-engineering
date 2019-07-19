@@ -1,0 +1,124 @@
+CFE-NTSW-B5.1.0.2 for GS1XXT (32bit,SP,BE,MIPS)
+Build Date: Wed Aug 11 18:05:01 IST 2010 (yrdreddy@lc-hyd-001)
+Copyright (C) 2000,2001,2002,2003,2004,2005 Broadcom Corporation.
+
+Initializing Arena.
+Initializing Devices.
+Board : GS108T
+CPU type 0x29050: 200MHz
+Total memory: 0x4000000 bytes (64MB)
+
+Total memory used by CFE:  0x83EA0000 - 0x83FFF720 (1439520)
+Initialized Data:          0x83EEA0D0 - 0x83EEB260 (4496)
+BSS Area:                  0x83EEB260 - 0x83EFD720 (74944)
+Local Heap:                0x83EFD720 - 0x83FFD720 (1048576)
+Stack Area:                0x83FFD720 - 0x83FFF720 (8192)
+Text (code) segment:       0x83EA0000 - 0x83EE97F7 (301047)
+Boot area (physical):      0x03E5F000 - 0x03E9F000
+Relocation Factor:         I:E42A0000 - D:E42A0000
+Compression Supported:     7zip
+
+Automatic startup canceled via Ctrl-C
+CFE> ifconfig eth0 -addr=192.168.0.10;boot -tftp -elf 192.168.0.9:/vmlinux-initramfs.elf
+Device eth0:  hwaddr 00-00-53-31-40-00, ipaddr 192.168.0.10, mask not set
+        gateway not set, nameserver not set
+Loader:elf Filesys:tftp Dev:eth0 File:192.168.0.9:/vmlinux-initramfs.elf Options:(null)
+Loading: 0x80001000/6520620 0x80638f2c/314676 Entry at 0x803c9880
+Closing network.
+-----------------
+eth0: 12748 sent, 12753 received, 0 interrupts
+  12747 tx interrupts, 12753 rx interrupts
+Starting program at 0x803c9880
+
+[    0.000000] Linux version 4.14.131 (fvollmer@fvollmer-MS-7750) (gcc version 7.4.0 (OpenWrt GCC 7.9
+[    0.000000] bootconsole [early0] enabled
+[    0.000000] CPU0 revision is: 00029050 (Broadcom BMIPS3300)
+[    0.000000] bcm47xx: Using ssb bus
+[    0.000000] idhi 0x0
+[    0.000000] bus->mmio 0xb8000000
+[    0.000000] Chipcommon:
+[    0.000000] chip id: 0xc312
+[    0.000000] chip revision: 0x10000
+[    0.000000] package Options: 0x100000
+[    0.000000] number of cores 0x0
+[    0.000000] chip type 0x0
+[    0.000000] capabilities: 0x2800d
+[    0.000000] core id low: 0x0
+[    0.000000] core id high: 0x0
+[    0.000000] 1:
+[    0.000000] core id low: 0x0
+[    0.000000] core id high: 0x0
+[    0.000000] 2:
+[    0.000000] core id low: 0x0
+[    0.000000] core id high: 0x0
+[    0.000000] cc: 0x0
+[    0.000000] scan_read32: 0x11c312
+[    0.000000] ssb: Found chip with id 0xC312, rev 0x01 and package 0x01
+[    0.000000] ssb: CHIPID not in nrcores fallback list
+[    0.000000] bus->nr_devices 1
+[    0.000000] ssb: Core 0 found: UNKNOWN (cc 0x000, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 1 found: UNKNOWN (cc 0x000, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 2 found: UNKNOWN (cc 0x000, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 3 found: UNKNOWN (cc 0x000, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 4 found: UNKNOWN (cc 0x000, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Sonics Silicon Backplane found at address 0x18000000
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 04000000 @ 00000000 (usable)
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 16 bytes.
+[    0.000000] Primary data cache 32kB, 2-way, VIPT, cache aliases, linesize 16 bytes
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] random: get_random_bytes called from start_kernel+0x88/0x4a8 with crng_init=0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16240
+[    0.000000] Kernel command line: noinitrd console=ttyS0,115200
+[    0.000000] PID hash table entries: 256 (order: -2, 1024 bytes)
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Memory: 58168K/65536K available (3899K kernel code, 163K rwdata, 840K rodata, 1488K i)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 128
+[    0.000000] MIPS: machine is Unknown Board
+[    0.000000] CPU 0 Unable to handle kernel paging request at virtual address 0000000c, epc == 80278
+[    0.000000] Oops[#1]:
+[    0.000000] CPU: 0 PID: 0 Comm: swapper Not tainted 4.14.131 #0
+[    0.000000] task: 804a9b10 task.stack: 804a4000
+[    0.000000] $ 0   : 00000000 10000000 00000000 10000000
+[    0.000000] $ 4   : 80642488 80668818 00000000 00000000
+[    0.000000] $ 8   : 00000000 00000000 00000018 00000000
+[    0.000000] $12   : 00000000 00000000 fffffff7 98968000
+[    0.000000] $16   : ffffffff 0000006f 804a0000 80640000
+[    0.000000] $20   : 00000001 000026d0 00000520 83ea0000
+[    0.000000] $24   : 00000000 00000000                  
+[    0.000000] $28   : 804a4000 804a5e68 e42a0000 804cf078
+[    0.000000] Hi    : 00000000
+[    0.000000] Lo    : 00000000
+[    0.000000] epc   : 8027df50 ssb_cpu_clock+0x14/0xdc
+[    0.000000] ra    : 804cf078 plat_time_init+0x60/0x140
+[    0.000000] Status: 10000002 KERNEL EXL 
+[    0.000000] Cause : 00800008 (ExcCode 02)
+[    0.000000] BadVA : 0000000c
+[    0.000000] PrId  : 00029050 (Broadcom BMIPS3300)
+[    0.000000] Modules linked in:
+[    0.000000] Process swapper (pid: 0, threadinfo=804a4000, task=804a9b10, tls=00000000)
+[    0.000000] Stack : 10000000 804d5468 804a0000 80640000 00000000 00000000 00000000 804d0f60
+[    0.000000]         ffffffff 804cf078 00000000 83ea0000 00000000 00000000 00000000 804ab310
+[    0.000000]         00000000 e444020b ffffffff 804ebc1c 804a0000 804d1f3c 804ebc1c 804a0000
+[    0.000000]         80640000 00000001 000026d0 804cca60 8045580c 804e8a38 00000000 00000000
+[    0.000000]         ffffffff ffffffff 00000000 804cc43c 804ebc1c e444020b 83ea0ab0 83efd2f8
+[    0.000000]         ...
+[    0.000000] Call Trace:
+[    0.000000] [<8027df50>] ssb_cpu_clock+0x14/0xdc
+[    0.000000] [<804cf078>] plat_time_init+0x60/0x140
+[    0.000000] [<804d1f3c>] time_init+0x10/0x7c
+[    0.000000] [<804cca60>] start_kernel+0x2f0/0x4a8
+[    0.000000] Code: afb00020  8c820000  3c031000 <8c50000c> 8e020280  00431024  10400005  00000000  
+[    0.000000] 
+[    0.000000] ---[ end trace ef1a92357e2188b4 ]---
+[    0.000000] Kernel panic - not syncing: Fatal exception
+[    0.000000] Rebooting in 1 seconds..
+[    0.000000] bcm47xx: Please stand by while rebooting the system...
