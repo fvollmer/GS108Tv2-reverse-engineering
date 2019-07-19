@@ -24,7 +24,7 @@ Netgear GS108Tv2 reverse engineering
    Or as a one-liner: `ifconfig eth0 -addr=192.168.0.10;boot -tftp -elf 192.168.0.9:/vmlinux-initramfs.elf`
  * The linux kernel isn't expecting any any bcm* device to be big endian. I crudely hacked openwrt (and the linux kernel) to use openwrt here: ToDo
  * To see any boot messages you have to enable early printk
- * The SSB bus isn't working. See the debug output here: ToDo
+ * The SSB bus isn't working. See the debug output [here](boot-log-openwrt). This log contains some additional debug statements and the ssb cores where limited to 4. Strangely all id high and low of the ssb cores are just 0. The only thing that appears to be ok is the chip id.
  
 ## Boot Initialization of the Stock Firmware
 Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. So here a rough overview of the boot and initialization process:
