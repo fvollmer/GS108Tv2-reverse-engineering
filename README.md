@@ -7,7 +7,7 @@ Netgear GS108Tv2 reverse engineering
  * RAM: NT5DS32M16BS (512Mbit = 64 MB)
 
 ## General Observations:
- * Stock firmware provides telnet access on port 60000. Login with username admin and your password
+ * Stock firmware provides telnet access on port 60000. Login with username `admin` and your password
  * Heat sink is glued. Tremendous force is requiered to remove it. I was succesful by using a putty knife to pry it out. A sheet of paper was used to protect the pcb, but I still think this is a rather risky mehtod.
  * There is a 14 pin smd pin header. Most likely it is a JTAG port. I didn't try it out.
  * There is a 4 pin smd pin header for the serial port, but it is hidden under the heatsink. GND, RX, TX, VCC. Logic levels appear to be 3.3V. Use 9600 baud 8 bit, no parity and 1 stop bit for communication.
