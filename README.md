@@ -46,7 +46,7 @@ A rough overview of the boot and initialization process:
 			* `sb_doattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L167)
 		* `sb_mips_init` at [`packages/hal/mips/bcm953710/v2_0/src/sbmips.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbmips.c#L385])
 
-Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos system appears to allocate the cores staticallly.
+Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos system appears to allocate the cores staticallly at `sb_doattach`.
 
 
 ## Miscellaneous Stuff:
