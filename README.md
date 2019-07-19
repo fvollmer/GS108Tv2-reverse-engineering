@@ -47,7 +47,7 @@ Netgear provides sources of the firmware here. I've placed them into a github re
 ## Miscellaneous Stuff:
  * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
 
-Related Links
+## Related Links
  * https://openwrt.org/docs/guide-developer/add.new.device
  * https://openwrt.org/docs/guide-developer/hw.hacking.first.steps
  * https://openwrt.org/docs/guide-developer/adding_new_device
