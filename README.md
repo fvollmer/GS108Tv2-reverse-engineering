@@ -13,6 +13,7 @@ Netgear GS108Tv2 reverse engineering
  * There is a 4 pin smd pin header for the serial port, but it is hidden under the heatsink. GND, RX, TX, VCC. Logic levels appear to be 3.3V. Use 9600 baud 8 bit, no parity and 1 stop bit for communication.
 * Bootloader is CFE. You cancel boot by pressing ctrl+c and will get a promt.
 * System is based on ecos
+* [Boot log of the stock system](boot-log-stock)
 
 ## Regarding booting OpenWRT:
  * You can do a network boot from the cfe bootloader (setup an tftp server):
