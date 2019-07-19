@@ -37,10 +37,10 @@ Netgear provides sources of the firmware here. I've placed them into a github re
 	* `hal_cache_init`              at [`packages/hal/mips/bcm47xx/v2_0/include/variant.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/include/variant.inc#L124)
 	* `hal_timer_init`              at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L813)
 	* `hal_variant_init`            at [`packages/hal/mips/bcm47xx/v2_0/src/var_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/src/var_misc.c)
-	* `hal_platform_init()`         at [`packages/hal/mips/bcm953710/v2_0/src/plf_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/plf_misc.c#L106)
-		* `sbh = sb_kattach()`
-			* `sb_doattach(&ksi, ...)`
-		* `sb_mips_init(sbh)`
+	* `hal_platform_init`         at [`packages/hal/mips/bcm953710/v2_0/src/plf_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/plf_misc.c#L106)
+		* `sb_kattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L152)
+			* `sb_doattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L167)
+		* `sb_mips_init` at [packages/hal/mips/bcm953710/v2_0/src/sbmips.c](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbmips.c#L385])
 
 
 
