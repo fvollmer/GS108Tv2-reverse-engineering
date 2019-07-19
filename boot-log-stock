@@ -1,0 +1,59 @@
+CFE-NTSW-B5.1.0.2 for GS1XXT (32bit,SP,BE,MIPS)                           
+Build Date: Wed Aug 11 18:05:01 IST 2010 (yrdreddy@lc-hyd-001)            
+Copyright (C) 2000,2001,                                                  
+                                                                          
+CFE-NTSW-B5.1.0.2 for GS1XXT (32bit,SP,BE,MIPS)                           
+Build Date: Wed Aug 11 18:05:01 IST 2010 (yrdreddy@lc-hyd-001)            
+Copyright (C) 2000,2001,2002,2003,2004,2005 Broadcom Corporation.         
+                                                                          
+Initializing Arena.                                                       
+Initializing Devices.                                                     
+Board : GS108T
+CPU type 0x29050: 200MHz
+Total memory: 0x4000000 bytes (64MB)
+                                                                                
+Total memory used by CFE:  0x83EA0000 - 0x83FFF720 (1439520)                    
+Initialized Data:          0x83EEA0D0 - 0x83EEB260 (4496)                       
+BSS Area:                  0x83EEB260 - 0x83EFD720 (74944)                      
+Local Heap:                0x83EFD720 - 0x83FFD720 (1048576)                    
+Stack Area:                0x83FFD720 - 0x83FFF720 (8192)                       
+Text (code) segment:       0x83EA0000 - 0x83EE97F7 (301047)                     
+Boot area (physical):      0x03E5F000 - 0x03E9F000                              
+Relocation Factor:         I:E42A0000 - D:E42A0000                              
+Compression Supported:     7zip                                                 
+                                                                                
+Loader:elf Filesys:raw Dev:flash0.os File: Options:(null)                       
+Loading:                                                                        
+Validating the code file..                                                      
+Flash stk image is 4067246 bytes,  CRC 0000A915                                 
+0x80041000/16045520 0x80f8e5d0/2993176 0xa0001000/262144 Entry at 0x80041000    
+Starting program at 0x80041000                                                  
+                                                                                
+16x5x SERIAL init - dev: b8000300.1                                             
+IFP: 0x80f1abd4, next: 0x81268f20                                               
+IFP: 0x81268f20, next: 0x00000000                                               
+                                                                                
+Vpd crc valid.                                                                  
+ramfs crc OK (0x1e8242b0)                                                       
+..FastPATH software Version 5.0.5.7 Build Date: Fri Sep 14 13:32:37 EDT 2012    
+Starting fpmain                                                                 
+ICS unit 0: Dev 0xc312, Rev 0x11, Chip BCM53312_B0, Driver BCM53314_A0          
+GPIO Board ID = 0                                                               
+SOC unit 0 attached to PCI device BCM53312_B0                                   
+                                                                                
+Tuning MMU with 4096 cells and 4 CoS queues for 13 ports of which 12 are Etherns
+Fan in is targeted at 4 while the over subscription is set to 8                 
+                                                                                
+calling init_bcm_53312, board_id=108 power=0 gpio_in boardid bits=0             
+.started!                                                                       
+[osapiPipeCreate-61]                                                            
+[osapiPipeOpen-67]                                                              
+..                                                                              
+(Unit 1)>                                                                       
+                                                                                
+Applying configuration, please wait ...                                         
+FastPATH Debug >                                                                
+                                                                                
+Applying Global configuration, please wait ...                                  
+                                                                                
+Applying Interface configuration, please wait ...
