@@ -27,7 +27,10 @@ Netgear GS108Tv2 reverse engineering
  * The SSB bus isn't working. See the debug output [here](boot-log-openwrt). This log contains some additional debug statements and the ssb cores where limited to 4. Strangely all id high and low of the ssb cores are just 0. The only thing that appears to be ok is the chip id.
  
 ## Boot Initialization of the Stock Firmware
-Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. So here a rough overview of the boot and initialization process:
+Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. 
+The boot process depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
+
+A rough overview of the boot and initialization process:
  * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L168)
 	* `hal_cpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L187)
 	* `hal_diag_init`               at [`packages/hal/mips/bcm953710/v2_0/src/hal_diag.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/hal_diag.c#L88)
