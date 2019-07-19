@@ -27,7 +27,7 @@ Netgear GS108Tv2 reverse engineering
  
 ## Boot Initialization of the Stock Firmware
 Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. So here a rough overview of the boot and initialization process:
- * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L127)
+ * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L168)
 	* `hal_cpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L187)
 	* `hal_diag_init`               at [`packages/hal/mips/bcm953710/v2_0/src/hal_diag.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/hal_diag.c#L88)
 	* `hal_mmu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc)
