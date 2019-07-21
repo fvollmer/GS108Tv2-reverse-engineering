@@ -1,0 +1,37 @@
+CFE> ifconfig eth0 -addr=192.168.0.10;boot -tftp -elf 192.168.0.9:/hello
+Device eth0:  hwaddr 00-00-53-31-40-00, ipaddr 192.168.0.10, mask not set
+        gateway not set, nameserver not set
+Loader:elf Filesys:tftp Dev:eth0 File:192.168.0.9:/hello Options:(null)
+Loading: 0x80041000/475944 0x800b5328/1236800 Entry at 0x80041000
+Closing network.
+-----------------
+eth0: 942 sent, 940 received, 0 interrupts
+  941 tx interrupts, 940 rx interrupts
+Starting program at 0x80041000
+
+16x5x SERIAL init - dev: b8000300.1
+ in flashDrvLibInit 47xx
+IFP: 0x801e1dd0, next: 0x00000000
+Hello, eCos world!
+chip id: 0xc312
+chip revision: 0x10000
+package Options: 0x100000
+number of cores 0x0
+0:
+core id low: 0x0
+core id high: 0x0
+2:
+core id low: 0x0
+core id high: 0x0
+1:
+core id low: 0x0
+core id high: 0x0
+2:
+core id low: 0x0
+core id high: 0x0
+3:
+core id low: 0x0
+core id high: 0x0
+4:
+core id low: 0x0
+core id high: 0x0
