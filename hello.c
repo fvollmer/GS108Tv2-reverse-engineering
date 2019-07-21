@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 
-static inline int readl(int *addr)
+static inline int readl(int addr)
 {
-	return *addr;
+	return *(int*)addr;
 }
 
 char __ramfs_runtime_data[1024];
