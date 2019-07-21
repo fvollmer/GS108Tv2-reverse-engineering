@@ -25,10 +25,13 @@ Netgear GS108Tv2 reverse engineering
  * The linux kernel isn't expecting any any bcm* device to be big endian. I crudely hacked openwrt (and the linux kernel) to use openwrt here: ToDo
  * To see any boot messages you have to enable early printk
  * The SSB bus isn't working. See the debug output [here](boot-log-openwrt). This log contains some additional debug statements and the ssb cores where limited to 4. Strangely all id high and low of the ssb cores are just 0. The only thing that appears to be ok is the chip id.
- 
+
+
+## Building the ecos sources
+The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modification I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
+
 ## Boot Initialization of the Stock Firmware
-Netgear provides sources of the firmware here. I've placed them into a github repository: https://github.com/fvollmer/GS108Tv2-ecos-2.0. The mentioned SSB bus problem could be due to an initialization problem. 
-The boot process depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
+One idea for the mentioned SSB bus problem was that maybe there is some initialization wrong. Therefore I took a closer look at the boot an initialization process. This depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
 
 A rough overview of the boot and initialization process:
  * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L168)
@@ -47,7 +50,6 @@ A rough overview of the boot and initialization process:
 		* `sb_mips_init` at [`packages/hal/mips/bcm953710/v2_0/src/sbmips.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbmips.c#L385])
 
 Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos system appears to allocate the cores staticallly at `sb_doattach`.
-
 
 ## Miscellaneous Stuff:
  * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
