@@ -28,7 +28,7 @@ Netgear GS108Tv2 reverse engineering
 
 
 ## Building the ecos sources
-The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modification I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
+The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modifications ([see commits at the github repository](https://github.com/fvollmer/GS108Tv2-ecos-2.0)) I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
 
 ## Boot Initialization of the Stock Firmware
 One idea for the mentioned SSB bus problem was that maybe there is some initialization wrong. Therefore I took a closer look at the boot an initialization process. This depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
