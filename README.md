@@ -26,6 +26,76 @@ Netgear GS108Tv2 reverse engineering
  * To see any boot messages you have to enable early printk
  * The SSB bus isn't working. See the debug output [here](boot-log-openwrt). This log contains some additional debug statements and the ssb cores where limited to 4. Strangely all id high and low of the ssb cores are just 0. The only thing that appears to be ok is the chip id.
 
+## Reading the excetion handler
+The exception handler looks like this:
+```
+**Exception 32: EPC=8027A97C, Cause=0000001C (BusErrD  )
+                RA=8027D8F0, VAddr=00000000
+
+        0  ($00) = 00000000     AT ($01) = 10000000
+        v0 ($02) = B8000000     v1 ($03) = 806421E4
+        a0 ($04) = 8064223C     a1 ($05) = B8005F18
+        a2 ($06) = 00000000     a3 ($07) = 000006E0
+        t0 ($08) = 00000000     t1 ($09) = 00000000
+        t2 ($10) = 00000007     t3 ($11) = 00000000
+        t4 ($12) = 0000002C     t5 ($13) = 804B0000
+        t6 ($14) = 00000000     t7 ($15) = 00000000
+        s0 ($16) = 8064223C     s1 ($17) = 8064223C
+        s2 ($18) = 806421E4     s3 ($19) = 00000006
+        s4 ($20) = 00000001     s5 ($21) = 00000001
+        s6 ($22) = 8064223C     s7 ($23) = 804785C0
+        t8 ($24) = 00000002     t9 ($25) = 00000000
+        k0 ($26) = 804A0000     k1 ($27) = 804B0000
+        gp ($28) = 804A4000     sp ($29) = 804A5D38
+        fp ($30) = 80642218     ra ($31) = 8027D8F0
+```
+The O32 ABI is used (see [MIPS calling convention](https://en.wikipedia.org/wiki/Calling_convention#MIPS). First four call arguments in  $a0-$a3, return argument(s) in $v0-$v1.
+
+EPC is the error programm counter, and RA is the return address. Both can be used with gdb to get information about the crash:
+```
+gdb ./build_dir/target-mips_mips32_musl/linux-brcm47xx_generic/vmlinux.debug 
+GNU gdb (Ubuntu 8.2.91.20190405-0ubuntu3) 8.2.91.20190405-git
+Copyright (C) 2019 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./build_dir/target-mips_mips32_musl/linux-brcm47xx_generic/vmlinux.debug...
+(gdb) list *0x8027A97C
+0x8027a97c is in ssb_host_soc_read32 (./arch/mips/include/asm/io.h:434).
+429	__BUILD_MEMORY_PFX(, bwlq, type)					\
+430	__BUILD_MEMORY_PFX(__mem_, bwlq, type)					\
+431	
+432	BUILDIO_MEM(b, u8)
+433	BUILDIO_MEM(w, u16)
+434	BUILDIO_MEM(l, u32)
+435	BUILDIO_MEM(q, u64)
+436	
+437	#define __BUILD_IOPORT_PFX(bus, bwlq, type)				\
+438		__BUILD_IOPORT_SINGLE(bus, bwlq, type, ,)			\
+(gdb) list *0x8027D8F0
+0x8027d8f0 is in ssb_sflash_cmd (./include/linux/ssb/ssb.h:599).
+594	{
+595		dev->ops->write16(dev, offset, value);
+596	}
+597	static inline void ssb_write32(struct ssb_device *dev, u16 offset, u32 value)
+598	{
+599		dev->ops->write32(dev, offset, value);
+600	}
+601	#ifdef CONFIG_SSB_BLOCKIO
+602	static inline void ssb_block_read(struct ssb_device *dev, void *buffer,
+603					  size_t count, u16 offset, u8 reg_width)
+(gdb) 
+```
 
 ## Building the ecos sources
 The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modifications ([see commits at the github repository](https://github.com/fvollmer/GS108Tv2-ecos-2.0)) I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
@@ -65,3 +135,4 @@ Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos
  * https://openwrt.org/docs/techref/bootloader/cfe
  * https://kb.netgear.com/2649/NETGEAR-Open-Source-Code-for-Programmers-GPL
  * https://bcm-v4.sipsolutions.net/
+ * https://en.wikipedia.org/wiki/Calling_convention#MIPS
