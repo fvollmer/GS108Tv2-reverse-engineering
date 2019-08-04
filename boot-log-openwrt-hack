@@ -1,0 +1,475 @@
+CFE-NTSW-B5.1.0.2 for GS1XXT (32bit,SP,BE,MIPS)
+Build Date: Wed Aug 11 18:05:01 IST 2010 (yrdreddy@lc-hyd-001)
+Copyright (C) 2000,2001,2002,2003,2004,2005 Broadcom Corporation.
+ 
+Initializing Arena.
+Initializing Devices.
+Board : GS108T
+CPU type 0x29050: 200MHz
+Total memory: 0x4000000 bytes (64MB)
+ 
+Total memory used by CFE:  0x83EA0000 - 0x83FFF720 (1439520)
+Initialized Data:          0x83EEA0D0 - 0x83EEB260 (4496)
+BSS Area:                  0x83EEB260 - 0x83EFD720 (74944)
+Local Heap:                0x83EFD720 - 0x83FFD720 (1048576)
+Stack Area:                0x83FFD720 - 0x83FFF720 (8192)
+Text (code) segment:       0x83EA0000 - 0x83EE97F7 (301047)
+Boot area (physical):      0x03E5F000 - 0x03E9F000
+Relocation Factor:         I:E42A0000 - D:E42A0000
+Compression Supported:     7zip
+ 
+Automatic startup canceled via Ctrl-C
+CFE> ifconfig eth0 -addr=192.168.1.10;boot -tftp -elf 192.168.1.9:/vmlinux-initramfs.elf
+Device eth0:  hwaddr 00-00-53-31-40-00, ipaddr 192.168.1.10, mask not set
+        gateway not set, nameserver not set
+Loader:elf Filesys:tftp Dev:eth0 File:192.168.1.9:/vmlinux-initramfs.elf Options:(null)
+Loading: 0x80001000/6520388 0x80638e44/314876 Entry at 0x803c9000
+Closing network.
+-----------------
+eth0: 12748 sent, 12746 received, 0 interrupts
+  12747 tx interrupts, 12746 rx interrupts
+Starting program at 0x803c9000
+ 
+[    0.000000] Linux version 4.14.131 (fvollmer@fvollmer-MS-7750) (gcc version 7.4.0 (OpenWrt GCC 7.4.0 r10437+6-d5a38725f8)) #0 Sun Aug 4 13:07:57 2019
+[    0.000000] CPU0 revision is: 00029050 (Broadcom BMIPS3300)
+[    0.000000] bcm47xx: Using ssb bus
+[    0.000000] ssb: Found chip with id 0xC312, rev 0x01 and package 0x01
+[    0.000000] ssb: Core 0 found: ChipCommon (cc 0x800, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 5 found: MIPS (cc 0x805, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: Core 8 found: MEMC SDRAM (cc 0x80F, rev 0x00, vendor 0x0000)
+[    0.000000] ssb: chipcommon status is 0x0
+[    0.000000] ssb: Initializing MIPS core...
+[    0.000000] ssb: after irq reconfiguration
+[    0.000000] ssb: core 0x0800, irq : 2(S)  3  4  5  6  D  I*
+[    0.000000] ssb: core 0x0805, irq : 2(S)  3  4  5  6  D  I*
+[    0.000000] ssb: core 0x080f, irq : 2(S)  3  4  5  6  D  I*
+[    0.000000] ssb: Sonics Silicon Backplane found at address 0x18000000
+[    0.000000] Determined physical RAM map:
+[    0.000000]  memory: 04000000 @ 00000000 (usable)
+[    0.000000] debug: ignoring loglevel setting.
+[    0.000000] Initrd not found or empty - disabling initrd
+[    0.000000] Primary instruction cache 32kB, VIPT, 4-way, linesize 16 bytes.
+[    0.000000] Primary data cache 32kB, 2-way, VIPT, cache aliases, linesize 16 bytes
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000000000-0x0000000003ffffff]
+[    0.000000] On node 0 totalpages: 16384
+[    0.000000] free_area_init_node: node 0, pgdat 804c93f0, node_mem_map 81000020
+[    0.000000]   Normal zone: 144 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 16384 pages, LIFO batch:3
+[    0.000000] random: get_random_bytes called from start_kernel+0x88/0x4a8 with crng_init=0
+[    0.000000] pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768
+[    0.000000] pcpu-alloc: [0] 0
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 16240
+[    0.000000] Kernel command line: noinitrd console=ttyS0,9600 ignore_loglevel init_debug=4,earlycon
+[    0.000000] PID hash table entries: 256 (order: -2, 1024 bytes)
+[    0.000000] Dentry cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Inode-cache hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Memory: 58168K/65536K available (3897K kernel code, 165K rwdata, 840K rodata, 1488K init, 279K bss, 7368K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] NR_IRQS: 128
+[    0.000000] MIPS: machine is Unknown Board
+[    0.000000] clocksource: MIPS: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 15927170388 ns
+[    0.000026] sched_clock: 32 bits at 120MHz, resolution 8ns, wraps every 17895697403ns
+[    0.000135] Calibrating delay loop... 239.61 BogoMIPS (lpj=1198080)
+[    0.070005] pid_max: default: 32768 minimum: 301
+[    0.070801] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.070879] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.079183] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.079262] futex hash table entries: 256 (order: -1, 3072 bytes)
+[    0.081904] NET: Registered protocol family 16
+[    0.139340] clocksource: Switched to clocksource MIPS
+[    0.144880] NET: Registered protocol family 2
+[    0.147012] TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.147148] TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+[    0.147250] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.147759] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    0.147876] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    0.148807] NET: Registered protocol family 1
+[    0.148938] PCI: CLS 0 bytes, default 16
+[    2.559439] random: fast init done
+[    3.656281] Crashlog allocated RAM at address 0x3f00000
+[    3.661621] workingset: timestamp_bits=14 max_order=14 bucket_order=0
+[    3.681057] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    3.681108] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+[    3.857755] io scheduler noop registered
+[    3.857807] io scheduler deadline registered (default)
+[    3.858223] Serial: 8250/16550 driver, 2 ports, IRQ sharing enabled
+[    3.859845] console [ttyS0] disabled
+[    3.880116] serial8250.0: ttyS0 at MMIO 0xb8000300 (irq = 3, base_baud = 6250000) is a 16550A
+[    8.081117] console [ttyS0] enabled
+[    8.175438] libphy: Fixed MDIO Bus: probed
+[    8.217148] bcm47xx-wdt bcm47xx-wdt.0: BCM47xx Watchdog Timer enabled (30 seconds, Software Timer)
+[    8.307059] GPIO_WDT: failed to register misc device
+[    8.360225] NET: Registered protocol family 10
+[    8.414848] Segment Routing with IPv6
+[    8.451802] NET: Registered protocol family 17
+[    8.496444] 8021q: 802.1Q VLAN Support v1.8
+[    8.563102] Freeing unused kernel memory: 1488K
+[    8.608487] This architecture does not have kernel memory protection.
+[    8.709697] init: Console is alive
+[    8.744410] init: - watchdog -
+[    8.775307] init: Ping
+[    8.799299] init: Opened watchdog with timeout 30s
+[    8.859192] init: Ping
+[    8.917957] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+[    8.986235] init: Ping
+[    9.016978] pps_core: LinuxPPS API ver. 1 registered
+[    9.066717] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    9.163700] PTP clock support registered
+[    9.203895] init: Ping
+[    9.238977] init: Ping
+[    9.289653] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+[    9.362247] init: Ping
+[    9.397112] init: Ping
+[    9.421513] init: - preinit -
+[    9.455124] init: Launched preinit instance, pid=236
+Could not open nvram! Possible reasons are:
+    - No device found (/proc not mounted or no nvram present)
+    - Insufficient permissions to open mtd device
+    - Insufficient memory to complete operation
+    - Memory mapping failed or not supported
+    - Nvram magic not found in specific nvram partition
+Could not open nvram! Possible reasons are:
+    - No device found (/proc not mounted or no nvram present)
+    - Insufficient permissions to open mtd device
+    - Insufficient[   10.022363] random: jshn: uninitialized urandom read (4 bytes read)
+ memory to complete operation
+    - Memory mapping failed or not supported
+    - Nvram magic not found in specific nvram partition
+Could not open n[   10.200407] random: jshn: uninitialized urandom read (4 bytes read)
+vram! Possible reasons are:
+    - No device found (/proc not mounted or no nvram present)
+    - Insu[   10.353516] random: jshn: uninitialized urandom read (4 bytes read)
+fficient permissions to open mtd device
+    - Insufficient memory to complete operation
+    - Memory mapping failed or not supported
+    - Nvram magic not found in specific nvram partition
+Could not open nvram! Possible reasons are:
+    - No device found (/proc not mounted or no nvram present)
+    - Insufficient permissions to open mtd device
+    - Insufficient memory to complete operation
+    - Memory mapping failed or not supported
+    - Nvram magic not found in specific nvram partition
+Could not open nvram! Possible reasons are:
+    - No device found (/proc not mounted or no nvram present)
+    - Insufficient permissions to open mtd device
+    - Insufficient memory to complete operation
+    - Memory mapping failed or not supported
+    - Nvram magic not found in specific nvram partition
+Press the [f] key and hit [enter] to enter failsafe mode
+Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+[   13.799882] init: Ping
+[   14.066075] init: Exec to real procd now
+[   14.127711] procd: Change state 0 -> 1
+[   14.165568] procd: - early -
+[   14.194699] procd: Watchdog handover: fd=3
+[   14.235982] procd: - watchdog -
+[   14.267729] procd: Ping
+[   14.292592] procd: Opened watchdog with timeout 30s
+[   14.378916] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/mem/full","SUBSYSTEM":"mem","SYNTH_UUID":"0","MAJOR":"1","MINOR":"7","DEVNAME":"full","DEVMODE":"0666","SEQNUM":"217"}}
+[   14.573657] procd: Command: makedev
+[   14.608905] procd:  /dev/full
+[   14.638890] procd:  0666
+[   14.664526] procd: Message:
+[   14.692774] procd:  ACTION=add
+[   14.723628] procd:  DEVPATH=/devices/virtual/mem/full
+[   14.774449] procd:  SUBSYSTEM=mem
+[   14.807903] procd:  SYNTH_UUID=0
+[   14.840491] procd:  MAJOR=1
+[   14.868737] procd:  MINOR=7
+[   14.896988] procd:  DEVNAME=full
+[   14.929681] procd:  DEVMODE=0666
+[   14.962276] procd:  SEQNUM=217
+[   14.993546] procd: Finished udevtrigger
+[   15.032563] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/mem/urandom","SUBSYSTEM":"mem","SYNTH_UUID":"0","MAJOR":"1","MINOR":"9","DEVNAME":"urandom","DEVMODE":"0666","SEQNUM":"218"}}
+[   15.201602] procd: Command: makedev
+[   15.236808] procd:  /dev/urandom
+[   15.269521] procd:  0666
+[   15.295153] procd: Message:
+[   15.323399] procd:  ACTION=add
+[   15.354251] procd:  DEVPATH=/devices/virtual/mem/urandom
+[   15.407686] procd:  SUBSYSTEM=mem
+[   15.441144] procd:  SYNTH_UUID=0
+[   15.473735] procd:  MAJOR=1
+[   15.501983] procd:  MINOR=9
+[   15.530231] procd:  DEVNAME=urandom
+[   15.565424] procd:  DEVMODE=0666
+[   15.598011] procd:  SEQNUM=218
+[   15.629624] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/mem/null","SUBSYSTEM":"mem","SYNTH_UUID":"0","MAJOR":"1","MINOR":"3","DEVNAME":"null","DEVMODE":"0666","SEQNUM":"219"}}
+[   15.793452] procd: Command: makedev
+[   15.828666] procd:  /dev/null
+[   15.858644] procd:  0666
+[   15.884278] procd: Message:
+[   15.912524] procd:  ACTION=add
+[   15.943379] procd:  DEVPATH=/devices/virtual/mem/null
+[   15.994199] procd:  SUBSYSTEM=mem
+[   16.027682] procd:  SYNTH_UUID=0
+[   16.060272] procd:  MAJOR=1
+[   16.088525] procd:  MINOR=3
+[   16.116779] procd:  DEVNAME=null
+[   16.149503] procd:  DEVMODE=0666
+[   16.182086] procd:  SEQNUM=219
+[   16.213438] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/mem/random","SUBSYSTEM":"mem","SYNTH_UUID":"0","MAJOR":"1","MINOR":"8","DEVNAME":"random","DEVMODE":"0666","SEQNUM":"220"}}
+[   16.380752] procd: Command: makedev
+[   16.415975] procd:  /dev/random
+[   16.447698] procd:  0666
+[   16.473330] procd: Message:
+[   16.501581] procd:  ACTION=add
+[   16.532440] procd:  DEVPATH=/devices/virtual/mem/random
+[   16.584997] procd:  SUBSYSTEM=mem
+[   16.618453] procd:  SYNTH_UUID=0
+[   16.651042] procd:  MAJOR=1
+[   16.679287] procd:  MINOR=8
+[   16.707540] procd:  DEVNAME=random
+[   16.741872] procd:  DEVMODE=0666
+[   16.774460] procd:  SEQNUM=220
+[   16.805784] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/misc/hw_random","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"183","DEVNAME":"hwrng","SEQNUM":"221"}}
+[   16.964799] procd: Command: makedev
+[   17.000013] procd:  /dev/hwrng
+[   17.030870] procd:  0600
+[   17.056524] procd: Message:
+[   17.084780] procd:  ACTION=add
+[   17.115637] procd:  DEVPATH=/devices/virtual/misc/hw_random
+[   17.171828] procd:  SUBSYSTEM=misc
+[   17.206166] procd:  SYNTH_UUID=0
+[   17.238757] procd:  MAJOR=10
+[   17.267879] procd:  MINOR=183
+[   17.297865] procd:  DEVNAME=hwrng
+[   17.331320] procd:  SEQNUM=221
+[   17.362847] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/misc/network_latency","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"62","DEVNAME":"network_latency","SEQNUM":"222"}}
+[   17.534894] procd: Command: makedev
+[   17.570111] procd:  /dev/network_latency
+[   17.609640] procd:  0600
+[   17.635274] procd: Message:
+[   17.663519] procd:  ACTION=add
+[   17.694376] procd:  DEVPATH=/devices/virtual/misc/network_latency
+[   17.755610] procd:  SUBSYSTEM=misc
+[   17.789934] procd:  SYNTH_UUID=0
+[   17.822520] procd:  MAJOR=10
+[   17.851636] procd:  MINOR=62
+[   17.880758] procd:  DEVNAME=network_latency
+[   17.922901] procd:  SEQNUM=222
+[   17.954428] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/misc/memory_bandwidth","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"60","DEVNAME":"memory_bandwidth","SEQNUM":"223"}}
+[   18.128222] procd: Command: makedev
+[   18.163438] procd:  /dev/memory_bandwidth
+[   18.203836] procd:  0600
+[   18.229542] procd: Message:
+[   18.257795] procd:  ACTION=add
+[   18.288655] procd:  DEVPATH=/devices/virtual/misc/memory_bandwidth
+[   18.350761] procd:  SUBSYSTEM=misc
+[   18.385095] procd:  SYNTH_UUID=0
+[   18.417688] procd:  MAJOR=10
+[   18.446808] procd:  MINOR=60
+[   18.475928] procd:  DEVNAME=memory_bandwidth
+[   18.518940] procd:  SEQNUM=223
+[   18.550486] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/misc/cpu_dma_latency","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"63","DEVNAME":"cpu_dma_latency","SEQNUM":"224"}}
+[   18.722532] procd: Command: makedev
+[   18.757742] procd:  /dev/cpu_dma_latency
+[   18.797271] procd:  0600
+[   18.822905] procd: Message:
+[   18.851163] procd:  ACTION=add
+[   18.882022] procd:  DEVPATH=/devices/virtual/misc/cpu_dma_latency
+[   18.943258] procd:  SUBSYSTEM=misc
+[   18.977585] procd:  SYNTH_UUID=0
+[   19.010172] procd:  MAJOR=10
+[   19.039296] procd:  MINOR=63
+[   19.068457] procd:  DEVNAME=cpu_dma_latency
+[   19.110597] procd:  SEQNUM=224
+[   19.142149] procd: {{"ACTION":"add","DEVPATH":"/devices/platform/bcm47xx-wdt.0/misc/watchdog","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"130","DEVNAME":"watchdog","SEQNUM":"225"}}
+[   19.315921] procd: Command: makedev
+[   19.351140] procd:  /dev/watchdog
+[   19.384592] procd:  0600
+[   19.410226] procd: Message:
+[   19.438479] procd:  ACTION=add
+[   19.469417] procd:  DEVPATH=/devices/platform/bcm47xx-wdt.0/misc/watchdog
+[   19.537576] procd:  SUBSYSTEM=misc
+[   19.571912] procd:  SYNTH_UUID=0
+[   19.604499] procd:  MAJOR=10
+[   19.633615] procd:  MINOR=130
+[   19.663597] procd:  DEVNAME=watchdog
+[   19.699658] procd:  SEQNUM=225
+[   19.730944] procd: Ping
+[   19.756079] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/misc/network_throughput","SUBSYSTEM":"misc","SYNTH_UUID":"0","MAJOR":"10","MINOR":"61","DEVNAME":"network_throughput","SEQNUM":"226"}}
+[   19.933333] procd: Command: makedev
+[   19.968552] procd:  /dev/network_throughput
+[   20.010689] procd:  0600
+[   20.036328] procd: Message:
+[   20.064579] procd:  ACTION=add
+[   20.095434] procd:  DEVPATH=/devices/virtual/misc/network_throughput
+[   20.159273] procd:  SUBSYSTEM=misc
+[   20.193615] procd:  SYNTH_UUID=0
+[   20.226208] procd:  MAJOR=10
+[   20.255328] procd:  MINOR=61
+[   20.284448] procd:  DEVNAME=network_throughput
+[   20.329188] procd:  SEQNUM=226
+[   20.360732] procd: {{"ACTION":"add","DEVPATH":"/devices/platform/bcm47xx-wdt.0/watchdog/watchdog0","SUBSYSTEM":"watchdog","SYNTH_UUID":"0","MAJOR":"253","MINOR":"0","DEVNAME":"watchdog0","SEQNUM":"227"}}
+[   20.542317] procd: Command: makedev
+[   20.577538] procd:  /dev/watchdog0
+[   20.611874] procd:  0600
+[   20.637506] procd: Message:
+[   20.665755] procd:  ACTION=add
+[   20.696616] procd:  DEVPATH=/devices/platform/bcm47xx-wdt.0/watchdog/watchdog0
+[   20.769141] procd:  SUBSYSTEM=watchdog
+[   20.806938] procd:  SYNTH_UUID=0
+[   20.839580] procd:  MAJOR=253
+[   20.869599] procd:  MINOR=0
+[   20.897876] procd:  DEVNAME=watchdog0
+[   20.934811] procd:  SEQNUM=227
+[   20.966366] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/tty/ptmx","SUBSYSTEM":"tty","SYNTH_UUID":"0","MAJOR":"5","MINOR":"2","DEVNAME":"ptmx","DEVMODE":"0666","SEQNUM":"228"}}
+[   21.130211] procd: Command: makedev
+[   21.165426] procd:  /dev/ptmx
+[   21.195409] procd:  0666
+[   21.221055] procd: Message:
+[   21.249307] procd:  ACTION=add
+[   21.280212] procd:  DEVPATH=/devices/virtual/tty/ptmx
+[   21.331032] procd:  SUBSYSTEM=tty
+[   21.364488] procd:  SYNTH_UUID=0
+[   21.397077] procd:  MAJOR=5
+[   21.425326] procd:  MINOR=2
+[   21.453578] procd:  DEVNAME=ptmx
+[   21.486168] procd:  DEVMODE=0666
+[   21.518766] procd:  SEQNUM=228
+[   21.550115] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/tty/console","SUBSYSTEM":"tty","SYNTH_UUID":"0","MAJOR":"5","MINOR":"1","DEVNAME":"console","SEQNUM":"229"}}
+[   21.704789] procd: Command: makedev
+[   21.740007] procd:  /dev/console
+[   21.772600] procd:  0600
+[   21.798233] procd: Message:
+[   21.826487] procd:  ACTION=add
+[   21.857348] procd:  DEVPATH=/devices/virtual/tty/console
+[   21.910774] procd:  SUBSYSTEM=tty
+[   21.944231] procd:  SYNTH_UUID=0
+[   21.976849] procd:  MAJOR=5
+[   22.005101] procd:  MINOR=1
+[   22.033363] procd:  DEVNAME=console
+[   22.068558] procd:  SEQNUM=229
+[   22.100423] procd: {{"ACTION":"add","DEVPATH":"/devices/platform/serial8250.0/tty/ttyS0","SUBSYSTEM":"tty","SYNTH_UUID":"0","MAJOR":"4","MINOR":"64","DEVNAME":"ttyS0","SEQNUM":"230"}}
+[   22.264658] procd: Command: makedev
+[   22.299876] procd:  /dev/ttyS0
+[   22.330729] procd:  0660
+[   22.356371] procd:  dialout
+[   22.384617] procd: Message:
+[   22.412868] procd:  ACTION=add
+[   22.443728] procd:  DEVPATH=/devices/platform/serial8250.0/tty/ttyS0
+[   22.507569] procd:  SUBSYSTEM=tty
+[   22.541031] procd:  SYNTH_UUID=0
+[   22.573627] procd:  MAJOR=4
+[   22.601881] procd:  MINOR=64
+[   22.630996] procd:  DEVNAME=ttyS0
+[   22.664454] procd:  SEQNUM=230
+[   22.695937] procd: Command: makedev
+[   22.731165] procd:  /dev/ttyS0
+[   22.762013] procd:  0600
+[   22.787645] procd: Message:
+[   22.815894] procd:  ACTION=add
+[   22.846748] procd:  DEVPATH=/devices/platform/serial8250.0/tty/ttyS0
+[   22.910589] procd:  SUBSYSTEM=tty
+[   22.944051] procd:  SYNTH_UUID=0
+[   22.976644] procd:  MAJOR=4
+[   23.004889] procd:  MINOR=64
+[   23.034020] procd:  DEVNAME=ttyS0
+[   23.067484] procd:  SEQNUM=230
+[   23.098972] procd: {{"ACTION":"add","DEVPATH":"/devices/virtual/tty/tty","SUBSYSTEM":"tty","SYNTH_UUID":"0","MAJOR":"5","MINOR":"0","DEVNAME":"tty","DEVMODE":"0666","SEQNUM":"231"}}
+[   23.261080] procd: Command: makedev
+[   23.296303] procd:  /dev/tty
+[   23.325416] procd:  0666
+[   23.351052] procd: Message:
+[   23.379303] procd:  ACTION=add
+[   23.410204] procd:  DEVPATH=/devices/virtual/tty/tty
+[   23.460155] procd:  SUBSYSTEM=tty
+[   23.493613] procd:  SYNTH_UUID=0
+[   23.526206] procd:  MAJOR=5
+[   23.554459] procd:  MINOR=0
+[   23.582706] procd:  DEVNAME=tty
+[   23.614425] procd:  DEVMODE=0666
+[   23.647012] procd:  SEQNUM=231
+[   23.678350] procd: {{"ACTION":"add","DEVPATH":"/devices/platform/serial8250/tty/ttyS1","SUBSYSTEM":"tty","SYNTH_UUID":"0","MAJOR":"4","MINOR":"65","DEVNAME":"ttyS1","SEQNUM":"232"}}
+[   23.840843] procd: Command: makedev
+[   23.876060] procd:  /dev/ttyS1
+[   23.906911] procd:  0660
+[   23.932555] procd:  dialout
+[   23.960792] procd: Message:
+[   23.989047] procd:  ACTION=add
+[   24.019912] procd:  DEVPATH=/devices/platform/serial8250/tty/ttyS1
+[   24.082013] procd:  SUBSYSTEM=tty
+[   24.115473] procd:  SYNTH_UUID=0
+[   24.148063] procd:  MAJOR=4
+[   24.176318] procd:  MINOR=65
+[   24.205436] procd:  DEVNAME=ttyS1
+[   24.238892] procd:  SEQNUM=232
+[   24.270329] procd: Command: makedev
+[   24.305550] procd:  /dev/ttyS1
+[   24.336413] procd:  0600
+[   24.362055] procd: Message:
+[   24.390304] procd:  ACTION=add
+[   24.421167] procd:  DEVPATH=/devices/platform/serial8250/tty/ttyS1
+[   24.483275] procd:  SUBSYSTEM=tty
+[   24.516742] procd:  SYNTH_UUID=0
+[   24.549414] procd:  MAJOR=4
+[   24.577642] procd:  MINOR=65
+[   24.606760] procd:  DEVNAME=ttyS1
+[   24.640215] procd:  SEQNUM=232
+[   24.755586] procd: Ping
+[   25.171887] procd: Coldplug complete
+[   25.207964] procd: Change state 1 -> 2
+[   25.245771] procd: - watchdog -
+[   25.277512] procd: Ping
+[   25.302347] procd: Opened watchdog with timeout 30s
+[   25.351998] procd: - ubus -
+[   25.380388] procd: Create service ubus
+[   25.418317] procd: Start instance ubus::instance1
+[   25.467365] procd: Started instance ubus::instance1[332]
+[   25.536564] random: ubusd: uninitialized urandom read (4 bytes read)
+[   25.600773] procd: running /etc/init.d/ubus running
+[   25.651076] procd: glob failed on /etc/init.d/ubus
+[   25.700897] random: ubusd: uninitialized urandom read (4 bytes read)
+[   25.765564] random: ubusd: uninitialized urandom read (4 bytes read)
+[   25.832338] procd: Connected to ubus, id=6f3d5e34
+[   25.879907] procd: Change state 2 -> 3
+[   25.917726] procd: - init -
+[   25.947327] procd: Parsing inittab - ::sysinit:/etc/init.d/rcS S boot
+[   26.012282] procd: Parsing inittab - ::shutdown:/etc/init.d/rcS K shutdown
+[   26.081547] procd: Parsing inittab - ::askconsole:/usr/libexec/login.sh
+[   26.150518] procd: Launched new askconsole action, pid=333
+Please press Ent[   26.213619] procd: running /etc/rc.d/S* boot
+er to activate this console.
+[   27.496529] urngd: v1.0.0 started.
+[   27.744540] kmodloader: loading kernel modules from /etc/modules.d/*
+[   27.905951] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[   28.073567] ip_tables: (C) 2000-2006 Netfilter Core Team
+[   28.210651] nf_conntrack version 0.5.0 (1024 buckets, 4096 max)
+[   28.408006] random: crng init done
+[   28.442103] random: 4 urandom warning(s) missed due to ratelimiting
+[   28.622183] xt_time: kernel timezone is -0000
+[   28.670618] bgmac_bcma: Broadcom 47xx GBit MAC driver loaded
+[   28.754663] PPP generic driver version 2.4.2
+[   28.808469] NET: Registered protocol family 24
+[   28.864242] kmodloader: done loading kernel modules from /etc/modules.d/*
+ 
+ 
+ 
+BusyBox v1.31.0 () built-in shell (ash)
+ 
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt SNAPSHOT, r10437+6-d5a38725f8
+ -----------------------------------------------------
+=== WARNING! =====================================
+There is no root password defined on this device!
+Use the "passwd" command to set up a new password
+in order to prevent unauthorized SSH logins.
+--------------------------------------------------
+root@OpenWrt:/# ls
+bin      etc      lib      overlay  rom      sbin     tmp      var
+dev      init     mnt      proc     root     sys      usr      www
+root@OpenWrt:/# echo "Hello World"
+Hello World
+root@OpenWrt:/#
