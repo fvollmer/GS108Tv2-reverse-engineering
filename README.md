@@ -2,7 +2,7 @@ Netgear GS108Tv2 reverse engineering
 =======================================
 
 ## Device Details
- * CPU: BCM53312 (BCM47xx/53xx MIPS Big Endian)
+ * CPU: BCM53312 (BCM47xx/53xx MIPS Big Endian) ([product brief](53312s.pdf))
  * Flash: JS28F128P33T85 (128Mbit = 16MB)
  * RAM: NT5DS32M16BS (512Mbit = 64 MB)
 
