@@ -28,8 +28,40 @@ Netgear GS108Tv2 reverse engineering
  * The IRQ handling of the SSB driver is also broken for this device, the function `ssb_irqflag` tries to acces `SSB_TPSFLAG` and crashes the kernel.
  * I created a some hacks and patches that work around the above problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing. I have yet to see what else is broken. It appears like the network isn't working? [New boot log](boot-log-openwrt-hack)
 
-## Reading the Excetion handler
-The exception handler looks like this:
+## ecos
+
+### Building the ecos Sources
+The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modifications ([see commits at the github repository](https://github.com/fvollmer/GS108Tv2-ecos-2.0)) I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
+
+### Reading the SSB Bus Registers from ecos
+The device should be correctly initialized if we use the ecos source code. This means we can check if the ssb registers with an ecos applicaton. I build a [quick test](hello.c) and compiled it with the example. According to the [output](bootlog-ecos-ssb) the id high and low registers are 0. It looks like there simply isn't an id.
+
+### Boot Initialization of the Stock Firmware
+One idea for the mentioned SSB bus problem was that maybe there is some initialization wrong. Therefore I took a closer look at the boot an initialization process. This depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
+
+A rough overview of the boot and initialization process:
+ * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L168)
+	* `hal_cpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L187)
+	* `hal_diag_init`               at [`packages/hal/mips/bcm953710/v2_0/src/hal_diag.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/hal_diag.c#L88)
+	* `hal_mmu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc)
+	* `hal_fpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L592)
+	* `hal_memc_init`               at [`packages/hal/mips/bcm953710/v2_0/include/platform.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/include/platform.inc#L200)
+		* `board_draminit`           at [`packages/hal/mips/bcm953710/v2_0/src/sbsdram.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbsdram.S#L156)
+	* `hal_cache_init`              at [`packages/hal/mips/bcm47xx/v2_0/include/variant.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/include/variant.inc#L124)
+	* `hal_timer_init`              at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L813)
+	* `hal_variant_init`            at [`packages/hal/mips/bcm47xx/v2_0/src/var_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/src/var_misc.c)
+	* `hal_platform_init`         at [`packages/hal/mips/bcm953710/v2_0/src/plf_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/plf_misc.c#L106)
+		* `sb_kattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L152)
+			* `sb_doattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L167)
+		* `sb_mips_init` at [`packages/hal/mips/bcm953710/v2_0/src/sbmips.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbmips.c#L385])
+
+Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos system appears to allocate the cores staticallly at `sb_doattach`.
+
+## Miscellaneous Stuff:
+ * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
+
+## The Excetion handler
+The default exception handler looks like this:
 ```
 **Exception 32: EPC=8027A97C, Cause=0000001C (BusErrD  )
                 RA=8027D8F0, VAddr=00000000
@@ -98,36 +130,6 @@ Reading symbols from ./build_dir/target-mips_mips32_musl/linux-brcm47xx_generic/
 603					  size_t count, u16 offset, u8 reg_width)
 (gdb) 
 ```
-
-## Building the ecos Sources
-The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modifications ([see commits at the github repository](https://github.com/fvollmer/GS108Tv2-ecos-2.0)) I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
-
-## Reading the SSB Bus Registers from ecos
-The device should be correctly initialized if we use the ecos source code. This means we can check if the ssb registers with an ecos applicaton. I build a [quick test](hello.c) and compiled it with the example. According to the [output](bootlog-ecos-ssb) the id high and low registers are 0. It looks like there simply isn't an id.
-
-## Boot Initialization of the Stock Firmware
-One idea for the mentioned SSB bus problem was that maybe there is some initialization wrong. Therefore I took a closer look at the boot an initialization process. This depends on the loaded packages. The configuration file should be [`mips_raptor_netgear.ecc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/mips_raptor_netgear.ecc). The most important packages seem to be `HAL_MIPS`, `HAL_MIPS_BCM47xx` and `HAL_MIPS_BCM953710`. 
-
-A rough overview of the boot and initialization process:
- * `_start`                        at [`packages/hal/mips/arch/v2_0/src/vectors.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/src/vectors.S#L168)
-	* `hal_cpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L187)
-	* `hal_diag_init`               at [`packages/hal/mips/bcm953710/v2_0/src/hal_diag.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/hal_diag.c#L88)
-	* `hal_mmu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc)
-	* `hal_fpu_init`                at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L592)
-	* `hal_memc_init`               at [`packages/hal/mips/bcm953710/v2_0/include/platform.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/include/platform.inc#L200)
-		* `board_draminit`           at [`packages/hal/mips/bcm953710/v2_0/src/sbsdram.S`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbsdram.S#L156)
-	* `hal_cache_init`              at [`packages/hal/mips/bcm47xx/v2_0/include/variant.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/include/variant.inc#L124)
-	* `hal_timer_init`              at [`packages/hal/mips/arch/v2_0/include/arch.inc`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/arch/v2_0/include/arch.inc#L813)
-	* `hal_variant_init`            at [`packages/hal/mips/bcm47xx/v2_0/src/var_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm47xx/v2_0/src/var_misc.c)
-	* `hal_platform_init`         at [`packages/hal/mips/bcm953710/v2_0/src/plf_misc.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/plf_misc.c#L106)
-		* `sb_kattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L152)
-			* `sb_doattach` at [`packages/hal/mips/bcm953710/v2_0/src/sbutils.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbutils.c#L167)
-		* `sb_mips_init` at [`packages/hal/mips/bcm953710/v2_0/src/sbmips.c`](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/packages/hal/mips/bcm953710/v2_0/src/sbmips.c#L385])
-
-Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos system appears to allocate the cores staticallly at `sb_doattach`.
-
-## Miscellaneous Stuff:
- * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
 
 ## Related Devices
 The GS700TR appears to be especially interesting device. The [source code release](https://www.downloads.netgear.com/files/GPL/GS7XXTR_V3.0.1_src.zip.zip) contains linux sources for the `bcm56218`. These sources are very similar to the ecos sources and the ssb core mapping appears to be the same. Needs further investigation.
