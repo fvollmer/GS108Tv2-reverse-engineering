@@ -15,7 +15,7 @@ Netgear GS108Tv2 reverse engineering
 * System is based on ecos
 * [Boot log of the stock system](boot-log-stock)
 
-## Regarding booting OpenWRT:
+## Regarding Booting OpenWRT:
  * You can do a network boot from the cfe bootloader (setup an tftp server):
    ```
    CFE> ifconfig eth0 -addr=192.168.0.10
@@ -28,7 +28,7 @@ Netgear GS108Tv2 reverse engineering
  * The IRQ handling of the SSB driver is also broken for this device, the function `ssb_irqflag` tries to acces `SSB_TPSFLAG` and crashes the kernel.
  * I created a some hacks and patches that work around the above problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing. I have yet to see what else is broken. It appears like the network isn't working? [New boot log](boot-log-openwrt-hack)
 
-## Reading the excetion handler
+## Reading the Excetion handler
 The exception handler looks like this:
 ```
 **Exception 32: EPC=8027A97C, Cause=0000001C (BusErrD  )
@@ -99,7 +99,7 @@ Reading symbols from ./build_dir/target-mips_mips32_musl/linux-brcm47xx_generic/
 (gdb) 
 ```
 
-## Building the ecos sources
+## Building the ecos Sources
 The stock firmware is based on the gpl licensed ecos operating system. These sources are provided by netgear. After some minor modifications ([see commits at the github repository](https://github.com/fvollmer/GS108Tv2-ecos-2.0)) I was able to build the sources using an old toolchain (recent versions are broken). I updated the [build instruction](https://github.com/fvollmer/GS108Tv2-ecos-2.0/blob/master/README.raptor_netgear.txt) to make building easier.
 
 ## Reading the SSB Bus Registers from ecos
@@ -128,6 +128,12 @@ Especially interesting appear `board_draminit` and `hal_platform_init`. The ecos
 
 ## Miscellaneous Stuff:
  * You can just edit the kernel files in the build directory and do a `make target/linux/install` to avoid recompiling everything. This way only the kernel is rebuild and a new image is created.
+
+## Related Devices
+The GS700TR appears to be especially interesting device. The [source code release](https://www.downloads.netgear.com/files/GPL/GS7XXTR_V3.0.1_src.zip.zip) contains linux sources for the `bcm56218`. These sources are very similar to the ecos sources and the ssb core mapping appears to be the same. Needs further investigation.
+
+## Special Thanks
+Thanks for the useful advices at the #openwrt-devel IRC channel. Especially to KanjiMonster who helped me with informations regarding the MIPS architecture and the SSB bus. The GS700TR sources were als discovered by KanjiMonster. 
 
 ## Related Links
  * https://openwrt.org/docs/guide-developer/add.new.device
