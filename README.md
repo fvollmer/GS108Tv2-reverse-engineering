@@ -16,7 +16,7 @@ Netgear GS108Tv2 reverse engineering
 * [Boot log of the stock system](boot-log-stock)
 
 ## Regarding Booting OpenWRT:
-I created a some hacks and patches that work around the above problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing ([New boot log](boot-log-openwrt-hack)). I have yet to see what else is broken. It appears like the network isn't working, which is most likely due to the pci bus not working. There are some more (and better) patches needed for the ssb driver.
+I created a some hacks and patches that work around the some problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing ([New boot log](boot-log-openwrt-hack)). I have yet to see what else is broken. It appears like the network isn't working, which is most likely due to the pci bus not working. There are some more (and better) patches needed for the ssb driver.
 
  * You can do a network boot from the cfe bootloader (setup an tftp server):
    ```
