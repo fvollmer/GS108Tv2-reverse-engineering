@@ -16,6 +16,8 @@ Netgear GS108Tv2 reverse engineering
 * [Boot log of the stock system](boot-log-stock)
 
 ## Regarding Booting OpenWRT:
+I created a some hacks and patches that work around the above problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing ([New boot log](boot-log-openwrt-hack)). I have yet to see what else is broken. It appears like the network isn't working, which is most likely due to the pci bus not working. There are some more (and better) patches needed for the ssb driver.
+
  * You can do a network boot from the cfe bootloader (setup an tftp server):
    ```
    CFE> ifconfig eth0 -addr=192.168.0.10
@@ -23,10 +25,10 @@ Netgear GS108Tv2 reverse engineering
    ```
    Or as a one-liner: `ifconfig eth0 -addr=192.168.0.10;boot -tftp -elf 192.168.0.9:/vmlinux-initramfs.elf`
  * The linux kernel isn't expecting any any bcm* device to be big endian. I crudely hacked openwrt and the linux kernel
- * It may be useful to add earlycon to the boot parameters. This enables early printk and you might see something before the kernel crashes.
+ * It may be useful to add earlycon to the boot parameters. This enables early printk and you might see something before the kernel crashes (not a problem anymore)
  * The linux kernel tries to scan the ssb bus. This won't work since all IDHIGH and IDLOW register are always 0. Further it tries to scan at invalid addresses. The debug output looks something like [this](boot-log-openwrt) (This log contains some additional debug statements and the ssb cores where limited to 4). The only thing that appears to be ok is the chip id. The original ecos operating systems appears to statically assign the cores.
  * The IRQ handling of the SSB driver is also broken for this device, the function `ssb_irqflag` tries to acces `SSB_TPSFLAG` and crashes the kernel.
- * I created a some hacks and patches that work around the above problems: https://github.com/fvollmer/GS108Tv2-openwrt. This is just  a very crude hack and definitly needs a complete rewrite. Nonetheless it allows to boot openwrt without crashing. I have yet to see what else is broken. It appears like the network isn't working? [New boot log](boot-log-openwrt-hack)
+
 
 ## ecos
 
